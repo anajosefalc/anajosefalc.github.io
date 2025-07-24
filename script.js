@@ -1,45 +1,36 @@
-let clickCounter = 0;
-let moodChanged = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const blurLayer = document.querySelector('.background-blur');
+  const heroText = document.querySelector('.hero-text');
+  const secondaryText = document.querySelector('.secondary-text');
+  const pickSite = document.querySelector('.pick-site');
+  const heroDots = document.querySelector('.hero-dots');
+  const siteHeader = document.querySelector('.site-header');
 
-function changeMood(mood) {
-    const moodParagraph = document.querySelector('.description');
-    const baseMap = document.querySelector('.base-map');
-    const overlayMap = document.querySelector('.overlay-map');
+  // Show main hero text after 1s
+  setTimeout(() => {
+    heroText.classList.add('show');
+  }, 1000);
 
-    if (mood === 0) {
-        moodParagraph.innerText = 'Parking Lots in Los Angeles, source: Los Angeles County';
-        baseMap.src = 'source/250619-Map1-v3-01.png';
-        overlayMap.style.opacity = 0;
-    } else if (mood === 1) {
-        moodParagraph.innerText = 'Commercial Parking Lots in Los Angeles, source: Los Angeles County';
-        baseMap.src = 'source/250619-Map2-v2-01.png';
-        overlayMap.style.opacity = 0;
-    } else if (mood === 2) {
-        moodParagraph.innerText = 'Concentration of the commercial parking lots';
-        baseMap.src = 'source/250619-Map1-v3-01.png';
-        overlayMap.style.opacity = 1;
-    }
-}
+  // Show secondary text after 2s
+  setTimeout(() => {
+    secondaryText.classList.add('show');
+  }, 2000);
 
-// Optional: throttle helper to prevent rapid triggers
-let throttleTimer = null;
+  // Remove both texts together after 4s
+  setTimeout(() => {
+    heroText.classList.remove('show');
+    secondaryText.classList.remove('show');
+  }, 4000);
 
-window.addEventListener('wheel', function (event) {
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.body.offsetHeight;
+  // Fade out blur layer after 4s
+  setTimeout(() => {
+    blurLayer.classList.add('fade-out');
+  }, 4000);
 
-    const atBottom = (scrollTop + windowHeight) >= (documentHeight - 5);
-
-    if (atBottom) {
-        // Optional throttle
-        if (throttleTimer) return;
-        throttleTimer = setTimeout(() => throttleTimer = null, 400);
-
-        // Only respond if actually scrolling past the bottom
-        if (event.deltaY > 0) {
-            clickCounter = (clickCounter + 1) % 3;
-            changeMood(clickCounter);
-        }
-    }
+  // Show interface elements after 5s
+  setTimeout(() => {
+    pickSite.classList.add('show');
+    heroDots.classList.add('show');
+    siteHeader.classList.add('show');
+  }, 5000);
 });

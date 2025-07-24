@@ -1,79 +1,203 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background: #fbf2ea;
-  max-width: 1200px;
-  margin: 10px auto;
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  background-color: #1e1e1e;
+  color: #EDFF00;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-@font-face {
-  font-family: 'Nanum';
-  src: url('source/Fonts/NanumMyeongjo-Regular.ttf') format('truetype');
-}
-
-h1 {
-  font-size: 150px;
-  color: #2b3a42;
-}
-
-.intro {
-  font-family: Helvetica, sans-serif;
-  font-size: 24px;
-  color: #ff007a;
-}
-
-.image-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
+/* Hero Container with map background */
 .hero {
-  width: 100%;
-  display: block;
-}
-
-.base-map {
   position: relative;
-  z-index: 1;
+  height: 100vh;
+  width: 100%;
+  background-image: url('assets/250722_map3.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
 }
 
-.overlay-map {
+/* Blur overlay that fades away */
+.background-blur {
   position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  background-color: rgba(30, 30, 30, 0.4);
+  z-index: 1;
+  transition: all 1.5s ease;
+}
+
+.background-blur.fade-out {
   opacity: 0;
+  backdrop-filter: blur(0px);
   pointer-events: none;
 }
 
-.description {
+/* Foreground text area */
+.hero-foreground {
   position: absolute;
-  bottom: 80px;
-  left: 0;
-  width: 100%;
-  text-align: left;
-  padding-left: 0;
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  color: #2b3a42;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Hero statement: "We believe..." */
+.hero-text {
+  font-size: 5vw;
+  font-weight: 700;
+  color: #EDFF00;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.hero-text.show {
+  opacity: 1;
+}
+
+/* Secondary statement: "Designing cities..." */
+.secondary-text {
+  font-size: 1.8vw;
+  font-weight: 400;
+  color: #EDFF00;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.secondary-text.show {
+  opacity: 1;
+}
+
+/* "↓ Explore the sites" */
+.pick-site {
+  position: absolute;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5vw;
+  color: #EDFF00;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.pick-site.show {
+  opacity: 1;
+}
+
+/* Dots Overlay */
+.hero-dots {
+  position: absolute;
+  inset: 0;
   z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #2b3a42;
-  color: white;
-  border: none;
-  cursor: pointer;
+.hero-dots.show {
+  opacity: 1;
 }
 
-button:hover {
-  background-color: #ff007a;
+.dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #EDFF00;
+  border-radius: 50%;
+  opacity: 1 !important;
+}
+
+/* Vertical column (left) */
+.dot.dot-1 { top: 20vh; left: 1vw; }
+.dot.dot-2 { top: 35vh; left: 1vw; }
+.dot.dot-3 { top: 50vh; left: 1vw; }
+.dot.dot-4 { top: 65vh; left: 1vw; }
+.dot.dot-5 { top: 80vh; left: 1vw; }
+.dot.dot-6 { top: 95vh; left: 1vw; }
+
+/* Horizontal row (bottom) */
+.dot.dot-7  { top: 95vh; left: 10vw; }
+.dot.dot-8  { top: 95vh; left: 20vw; }
+.dot.dot-9  { top: 95vh; left: 30vw; }
+.dot.dot-10 { top: 95vh; left: 40vw; }
+.dot.dot-11 { top: 95vh; left: 50vw; }
+.dot.dot-12 { top: 95vh; left: 60vw; }
+.dot.dot-13 { top: 95vh; left: 70vw; }
+.dot.dot-14 { top: 95vh; left: 80vw; }
+.dot.dot-15 { top: 95vh; left: 90vw; }
+
+/* Top header */
+.site-header {
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  right: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 1s ease;
+  align-items: center;
+}
+
+.site-header.show {
+  opacity: 1;
+}
+
+.title {
+  font-size: 8vw;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1;
+  color: #EDFF00;
+}
+
+.curious {
+  font-size: 1vw;
+  text-align: right;
+  margin-top: -1.5rem;
+  color:#0A0A23;
+  padding: 0.5rem 1rem 1rem 0.5rem;
+  line-height: 1;
+  padding-top: 1.2rem;
+  background-color: #FFF8DC;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .hero-text {
+    font-size: 8vw;
+  }
+
+  .secondary-text {
+    font-size: 4vw;
+  }
+
+  .pick-site {
+    font-size: 5vw;
+  }
+
+  .title {
+    font-size: 5vw;
+  }
+
+  .curious {
+    font-size: 3vw;
+  }
 }
