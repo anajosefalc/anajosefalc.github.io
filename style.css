@@ -173,10 +173,10 @@ html, body {
   text-align: right;
   margin-top: -1.5rem;
   color:#0A0A23;
-  padding: 0.5rem 1rem 1rem 0.5rem;
+  padding: 0.5rem 0.5rem 1rem 0.5rem;
   line-height: 1;
   padding-top: 1.2rem;
-  background-color: #FFF8DC;
+  background-color: #EDFF00;
 }
 
 /* Responsive Tweaks */
