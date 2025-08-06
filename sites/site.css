@@ -1,0 +1,30 @@
+/* === SITE PANEL FADE-IN === */
+.site-detail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; 
+  height: 100vh;
+  background-color: #fffbea;
+  overflow-y: auto;
+  z-index: 50;
+  padding: 4rem;
+  
+  /* start fully transparent */
+  opacity: 0;
+  pointer-events: none;          /* block clicks when hidden */
+  transition:
+    opacity 0.8s ease;          /* fade duration */
+}
+
+/* when we add .show, fade to opaque and allow clicks */
+.site-detail.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Header & content can fade in together, or be instant if you'd like */
+.site-detail .site-header,
+.site-detail .site-content {
+  opacity: 1;  /* already visible when panel is opaque */
+  transition: none;  /* no further delay */
+}

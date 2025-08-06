@@ -1,56 +1,92 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ALL OF US</title>
+
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="buttons/site-button.css" />
+  <link rel="stylesheet" href="sites/site.css" />
 </head>
-<body>
+<body id="mainBody" class="lock-scroll">
 
-  <div id="hero" class="hero">
+  <div id="mainWrapper" class="wrapper">
 
-    <!-- Static Map Background -->
-    <div class="hero-map"></div>
+    <!-- HERO -->
+    <div id="hero" class="hero">
+      <div class="hero-map-wrapper">
+        <div class="hero-map"></div>
+        <a href="#site1" class="site-link">
+          <img
+            src="assets/250805-Site01.png"
+            id="site1-img"
+            class="site-outline"
+            alt="Site 1 outline"
+            title="Go to Site 1 info"
+          />
+        </a>
+      </div>
 
-    <!-- Blurry Overlay -->
-    <div class="background-blur" id="blur-layer"></div>
+      <div class="background-blur" id="blur-layer"></div>
+      <div class="hero-foreground">
+        <h1 class="hero-text" id="heroText">We believe in sharing the city</h1>
+        <p class="secondary-text" id="secondaryText">Designing cities that include All Of Us</p>
+        <p class="pick-site" id="pickSite">Explore the sites for discovering our proposals</p>
+      </div>
 
-    <!-- Foreground Hero Texts -->
-    <div class="hero-foreground">
-      <h1 class="hero-text" id="heroText">We believe in sharing the city</h1>
-      <p class="secondary-text" id="secondaryText">Designing cities that include All Of Us</p>
-      <p class="pick-site" id="pickSite">Explore the sites for discovering our proposals</p>
+      <div class="site-buttons hidden" id="siteButtonsContainer"></div>
+      <div class="learn-more-bounce" id="learnMore">
+        <span class="learn-text"><strong>LEARN MORE</strong></span>
+        <span class="arrow">➝</span>
+      </div>
+
+      <div class="hero-dots" id="heroDots">
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
+        <div class="dot dot-4"></div>
+        <div class="dot dot-5"></div>
+        <div class="dot dot-6"></div>
+        <div class="dot dot-7"></div>
+        <div class="dot dot-8"></div>
+        <div class="dot dot-9"></div>
+        <div class="dot dot-10"></div>
+        <div class="dot dot-11"></div>
+        <div class="dot dot-12"></div>
+        <div class="dot dot-13"></div>
+        <div class="dot dot-14"></div>
+        <div class="dot dot-15"></div>
+      </div>
+
+      <div class="site-header" id="siteHeader">
+        <div class="title">ALL OF US</div>
+        <div class="curious-container">
+          <div class="curious" id="curiousMessage">
+            <strong>CURIOUS?</strong> WE THOUGHT SO, LET'S TALK
+          </div>
+          <button class="back-button hidden" id="backButton">← BACK TO MAP</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Decorative Dots -->
-    <div class="hero-dots" id="heroDots">
-      <div class="dot dot-1"></div>
-      <div class="dot dot-2"></div>
-      <div class="dot dot-3"></div>
-      <div class="dot dot-4"></div>
-      <div class="dot dot-5"></div>
-      <div class="dot dot-6"></div>
-      <div class="dot dot-7"></div>
-      <div class="dot dot-8"></div>
-      <div class="dot dot-9"></div>
-      <div class="dot dot-10"></div>
-      <div class="dot dot-11"></div>
-      <div class="dot dot-12"></div>
-      <div class="dot dot-13"></div>
-      <div class="dot dot-14"></div>
-      <div class="dot dot-15"></div>
-    </div>
-
-    <!-- Top Header -->
-    <div class="site-header" id="siteHeader">
-      <div class="title">ALL OF US</div>
-      <div class="curious">CURIOUS? WE THOUGHT SO, LET'S TALK</div>
+    <div id="aboutSection" class="about hidden">
+      <div class="about-content">
+        <h2>What is All of Us?</h2>
+        <p>Background, purpose, values…</p>
+      </div>
     </div>
 
   </div>
 
-  <script src="script.js"></script>
+  <section id="site1" class="site-detail hidden">
+    <div class="about-content">
+      <h2>Site 1</h2>
+      <p>Here’s all the information for Site 1.</p>
+    </div>
+  </section>
+
+  <!-- NOTE the type="module" and correct path -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
