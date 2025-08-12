@@ -1,30 +1,83 @@
-/* === SITE PANEL FADE-IN === */
+/* === SITE PANEL (shared by all siteX.html) === */
 .site-detail {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; 
+  width: 100vw;
   height: 100vh;
   background-color: #fffbea;
   overflow-y: auto;
   z-index: 50;
+
   padding: 4rem;
-  
-  /* start fully transparent */
   opacity: 0;
-  pointer-events: none;          /* block clicks when hidden */
-  transition:
-    opacity 0.8s ease;          /* fade duration */
+  pointer-events: none;
+  transition: opacity 0.8s ease;
 }
 
-/* when we add .show, fade to opaque and allow clicks */
 .site-detail.show {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Header & content can fade in together, or be instant if you'd like */
-.site-detail .site-header,
-.site-detail .site-content {
-  opacity: 1;  /* already visible when panel is opaque */
-  transition: none;  /* no further delay */
+/* Prevent header/image duplication or layout collision */
+.site-detail .cloned.site-header {
+  z-index: 60;
+  background-color: #fffbea;
+  position: sticky;
+  top: 0;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #ccc;
+}
+
+/* === SITE CONTENT === */
+.site-columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 4rem;
+  flex-wrap: wrap;
+  z-index: 40;
+}
+
+/* Text */
+.site-content {
+  flex: 1 1 50%;
+  color: #1e1e1e;
+  max-width: 600px;
+}
+
+.site-content h3 {
+  font-size: 2.5vw;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.site-content p {
+  font-size: 1.2vw;
+  line-height: 1.6;
+}
+
+/* Image or diagram */
+.site-image {
+  flex: 1 1 40%;
+  max-width: 600px;
+}
+.site-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .site-columns {
+    flex-direction: column;
+  }
+  .site-content, .site-image {
+    max-width: 100%;
+  }
+  .site-content h3 { font-size: 5vw; }
+  .site-content p { font-size: 3.5vw; }
 }

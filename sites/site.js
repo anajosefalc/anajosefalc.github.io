@@ -1,35 +1,61 @@
-// sites/site.js
-
 export async function loadSite(id) {
-  const panel = document.getElementById(`site${id}`);
-  if (!panel) return;
+  const panelId = `site${id}`;
+  let panel = document.getElementById(panelId);
 
-  // … fetch & inject site-content …
+  // If panel doesn't exist yet, fetch and inject it
+  if (!panel) {
+    try {
+      const response = await fetch(`sites/${panelId}.html`);
+      const html = await response.text();
 
-  // Clone the main-page header
-  const liveHeader = document.getElementById('siteHeader');
-  const cloned     = liveHeader.cloneNode(true);
-  cloned.removeAttribute('id');
+      // Create a temporary wrapper to parse HTML
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
 
-  // Hide the “CURIOUS?” message in the cloned header
-  const curious = cloned.querySelector('.curious');
-  if (curious) curious.style.display = 'none';
+      // Extract the section#siteX
+      const section = temp.querySelector(`#${panelId}`);
+      if (section) {
+        document.body.appendChild(section);
+        panel = section;
+      } else {
+        console.error(`No #${panelId} section found in sites/${panelId}.html`);
+        return;
+      }
+    } catch (err) {
+      console.error(`Error loading site ${id}:`, err);
+      return;
+    }
+  }
 
-  // Ensure the back-button is visible
-  const backBtn = cloned.querySelector('.back-button');
-  backBtn.style.display = 'inline-block';
+  // Avoid adding duplicate headers
+  if (!panel.querySelector('.site-header.cloned')) {
+    const liveHeader = document.getElementById('siteHeader');
+    if (liveHeader) {
+      const cloned = liveHeader.cloneNode(true);
+      cloned.classList.add('cloned');
+      cloned.removeAttribute('id');
 
-  // Prepend to the panel
-  panel.insertBefore(cloned, panel.firstChild);
+      // Hide "CURIOUS?" if it exists
+      const curious = cloned.querySelector('.curious');
+      if (curious) curious.style.display = 'none';
 
-  // Hook up the back-button
-  backBtn.addEventListener('click', () => {
-    panel.classList.remove('show');
-    panel.classList.add('hidden');
-    document.getElementById('mainBody').classList.add('lock-scroll');
-  });
+      // Ensure the back-button is visible
+      const backBtn = cloned.querySelector('.back-button');
+      if (backBtn) {
+        backBtn.style.display = 'inline-block';
+        backBtn.addEventListener('click', () => {
+          panel.classList.remove('show');
+          setTimeout(() => panel.classList.add('hidden'), 800);
+          document.getElementById('mainBody').classList.add('lock-scroll');
+        });
+      }
+
+      panel.insertBefore(cloned, panel.firstChild);
+    }
+  }
 
   // Show the panel
   panel.classList.remove('hidden');
-  panel.classList.add('show');
+  setTimeout(() => panel.classList.add('show'), 50);
+  document.getElementById('mainBody').classList.remove('lock-scroll');
 }

@@ -1,15 +1,27 @@
 <!-- sites/site1.html -->
-<!-- 1) Repeat the header with back button -->
-<div class="site-header">
-  <div class="title">ALL OF US</div>
-  <div class="curious-container">
-    <button class="back-button">← BACK TO MAP</button>
-  </div>
-</div>
 
-<!-- 2) Wrap your text in .site-content -->
-<div class="site-content">
-  <h3>Site 1</h3>
-  <p>Here’s all the information for Site 1.</p>
-  <!-- any other lists, images, etc. -->
-</div>
+<section id="site1" class="site-detail hidden">
+  <!-- 1. Site-specific Header (cloned automatically) -->
+  <div class="site-header">
+    <div class="title">ALL OF US</div>
+    <div class="curious-container">
+      <button class="back-button">← BACK TO MAP</button>
+    </div>
+  </div>
+
+  <!-- 2. Two-column layout with text and image -->
+  <div class="site-columns">
+    <!-- Left Column: Description -->
+    <div class="site-content">
+      <h3>Site 1:</h3>
+      <p>
+       220 Sunset Ave Parking
+      </p>
+    </div>
+
+    <!-- Right Column: Visual -->
+    <div class="site-image">
+      <img src="sites/assets/2500804-Bldg01-02_00001_.png" alt="Site 1 overview" />
+    </div>
+  </div>
+</section>
