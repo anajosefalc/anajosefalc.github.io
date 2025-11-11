@@ -31,12 +31,18 @@
       },
     };
   </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 
 <body class="bg-sand text-navy font-sans antialiased">
 
   <!-- HERO SECTION -->
-  <section class="relative min-h-screen bg-sand flex items-center">
+  <section id="hero" class="relative min-h-screen bg-sand flex items-center">
 
     <!-- FLOATING MENU (top-right) -->
     <div class="absolute top-8 right-10 z-20">
@@ -86,12 +92,14 @@
     <!-- CENTERED HERO CONTENT -->
     <div class="w-full max-w-8xl mx-auto px-10 py-20">
       <div class="grid gap-12 md:grid-cols-2 items-center">
-        <!-- LEFT: NAME -->
+        <!-- LEFT: NAME (now clickable) -->
         <div class="text-center md:text-left space-y-3">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight leading-tight">
-            Ana<br />
-            Labarthe-Carvallo
-          </h1>
+          <a href="#about" class="group inline-block cursor-pointer">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight leading-tight transition-colors duration-300 group-hover:text-neon">
+              Ana<br />
+              Labarthe-Carvallo
+            </h1>
+          </a>
         </div>
 
         <!-- RIGHT: ROLES -->
@@ -111,6 +119,24 @@
 
   </section>
 
+  <!-- ABOUT SECTION -->
+  <section id="about" class="min-h-screen bg-peach flex items-center justify-center px-10 py-20">
+    <div class="max-w-3xl text-center">
+      <h2 class="text-3xl md:text-4xl font-light mb-6">About Ana Josefa Labarthe</h2>
+      <p class="text-navy/80 leading-relaxed">
+        This section can include your biography, research focus, and design philosophy. 
+        It will be reached when clicking your name on the left side of the hero section.
+      </p>
+    </div>
+
+    <!-- BACK TO MAIN BUTTON -->
+    <a href="#hero"
+       class="text-sm uppercase tracking-[0.2em] border border-navy/30 px-6 py-3 text-navy/80 hover:bg-neon hover:text-sand transition-all duration-300">
+       ← Back to Main
+    </a>
+
+  </section>
+
   <!-- JAVASCRIPT -->
   <script>
     const panelToggle = document.getElementById("panelToggle");
@@ -125,7 +151,6 @@
       });
     }
 
-    // Optional: close when clicking a link
     navLinks?.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         navLinks.classList.add("hidden");
