@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -24,140 +24,239 @@
             neon: "#FF6F5E",
             peach: "#FFF3EC",
           },
-          fontFamily: {
-            sans: ["Roboto", "system-ui", "sans-serif"],
-          },
-        },
-      },
-    };
+          fontFamily: { sans: ["Roboto","system-ui","sans-serif"] },
+          boxShadow: {
+            neonhalo: "4px 6px 12px 0 rgba(255, 111, 94, 0.25)",
+          }
+        }
+      }
+    }
   </script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
+    /* lock the intro screen */
+    body.locked { overflow: hidden; height: 100vh; }
   </style>
 </head>
 
-<body class="bg-sand text-navy font-sans antialiased">
+<body class="bg-sand text-navy font-sans antialiased locked">
 
-  <!-- HERO SECTION -->
+  <!-- FIXED back button (hidden until we leave hero) -->
+  <a href="#hero" id="backToMain"
+     class="fixed top-6 right-10 z-30 hidden text-xs md:text-sm uppercase tracking-[0.2em]
+            border border-neon/30 px-4 py-2 md:px-5 md:py-2.5 text-navy/80
+            bg-sand/85 backdrop-blur-sm hover:bg-neon hover:text-sand transition-all duration-300">
+    ← Back to Main
+  </a>
+
+  <!-- HERO -->
   <section id="hero" class="relative min-h-screen bg-sand flex items-center">
-
-    <!-- FLOATING MENU (top-right) -->
-    <div class="absolute top-8 right-10 z-20">
-      <div class="w-64 bg-neon text-sand border border-taupe/60 shadow-lg">
-        <button
-          id="panelToggle"
-          class="w-full flex items-center justify-between px-4 py-3 text-[0.7rem] tracking-[0.25em] uppercase"
-          aria-expanded="false"
-          aria-controls="navLinks"
-        >
-          <span>Menu</span>
-          <span id="panelIcon" class="text-base leading-none">+</span>
-        </button>
-
-        <!-- NAVIGATION LINKS -->
-        <nav
-          id="navLinks"
-          class="hidden text-xs tracking-[0.2em] uppercase border-t border-sand/20 bg-neon"
-        >
-          <a
-            href="#information"
-            class="flex items-center justify-between px-4 py-3 border-b border-sand/20 hover:bg-sand/10 hover:text-navy transition"
-          >
-            <span>Information</span>
-            <span class="w-6 h-6 bg-peach border border-sand/30"></span>
-          </a>
-
-          <a
-            href="#projects"
-            class="flex items-center justify-between px-4 py-3 border-b border-sand/20 hover:bg-sand/10 hover:text-navy transition"
-          >
-            <span>Project Directory</span>
-            <span class="w-6 h-6 bg-clay border border-sand/30"></span>
-          </a>
-
-          <a
-            href="#academic"
-            class="flex items-center justify-between px-4 py-3 hover:bg-sand/10 hover:text-navy transition"
-          >
-            <span>Academic Directory</span>
-            <span class="w-6 h-6 bg-taupe border border-sand/30"></span>
-          </a>
-        </nav>
-      </div>
-    </div>
-
-    <!-- CENTERED HERO CONTENT -->
     <div class="w-full max-w-8xl mx-auto px-10 py-20">
       <div class="grid gap-12 md:grid-cols-2 items-center">
-        <!-- LEFT: NAME (now clickable) -->
+        <!-- LEFT: Name (to About) -->
         <div class="text-center md:text-left space-y-3">
-          <a href="#about" class="group inline-block cursor-pointer">
+          <a href="#about" id="enterSite" class="group inline-block cursor-pointer">
             <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight leading-tight transition-colors duration-300 group-hover:text-neon">
-              Ana<br />
-              Labarthe-Carvallo
+              Ana<br/>Labarthe-Carvallo
             </h1>
           </a>
         </div>
 
-        <!-- RIGHT: ROLES -->
-        <div class="text-center md:text-right space-y-1">
-          <p class="text-md uppercase text-navy/60">
-            Architectural Designer
-          </p>
-          <p class="text-md uppercase text-navy/60">
-            Researcher
-          </p>
-          <p class="text-md uppercase text-navy/60">
-            Technologist
-          </p>
+        <!-- RIGHT: Professions -->
+        <div class="flex flex-col items-end gap-0">
+
+          <!-- ARCHITECTURAL DESIGNER -->
+          <div class="group text-right">
+            <button
+              class="text-md uppercase 
+                    text-navy/60 group-hover:text-neon
+                    transition-colors duration-300">
+              Architectural Designer
+            </button>
+
+            <!-- submenu: IN-FLOW, not absolute -->
+            <div class="overflow-hidden max-h-0 opacity-0 pointer-events-none
+                        transition-all duration-300 ease-out
+                        transform translate-y-2
+                        group-hover:max-h-40 group-hover:opacity-100 group-hover:pointer-events-auto
+                        group-hover:translate-y-0
+                        mt-2 w-64 shadow-neonhalo
+                        p-2 text-[0.85rem]">
+              <a href="#designer-professional" class="pop-link block px-3 py-2 hover:text-neon transition-colors duration-200">
+                Professional Work
+              </a>
+              <a href="#designer-academic" class="pop-link block px-3 py-2 hover:text-neon transition-colors duration-200">
+                Academic Work
+              </a>
+            </div>
+          </div>
+
+          <!-- RESEARCHER -->
+          <div class="group text-right">
+            <button
+              class="text-md uppercase 
+                    text-navy/60 group-hover:text-neon
+                    transition-colors duration-300">
+              Researcher
+            </button>
+
+            <div class="overflow-hidden max-h-0 opacity-0 pointer-events-none
+                        transition-all duration-300 ease-out
+                        transform translate-y-2
+                        group-hover:max-h-40 group-hover:opacity-100 group-hover:pointer-events-auto
+                        group-hover:translate-y-0
+                        mt-2 w-64 shadow-neonhalo
+                        p-2 text-[0.85rem]">
+
+              <a href="#research-articles" class="pop-link block px-3 py-2 hover:text-neon transition-colors duration-200">
+                Articles & Essays
+              </a>
+              <a href="#research-projects" class="pop-link block px-3 py-2 hover:text-neon transition-colors duration-200">
+                Research Projects
+              </a>
+            </div>
+          </div>
+
+          <!-- TECHNOLOGIST -->
+          <div class="group text-right">
+            <button
+              class="text-md uppercase 
+                    text-navy/60 group-hover:text-neon
+                    transition-colors duration-300">
+              Technologist
+            </button>
+
+            <div class="overflow-hidden max-h-0 opacity-0 pointer-events-none
+                        transition-all duration-300 ease-out
+                        transform translate-y-2
+                        group-hover:max-h-40 group-hover:opacity-100 group-hover:pointer-events-auto
+                        group-hover:translate-y-0
+                        mt-2 w-64 shadow-neonhalo
+                        p-2 text-[0.85rem]">
+
+              <a href="#tech-tools" class="pop-link block px-3 py-2 hover:text-neon transition-colors duration-200">
+                Tools & Code
+              </a>
+              <a href="#tech-workflows" class="pop-link block px-3 py-2 hover:text-neon transition-colors duration-200">
+                Workflows
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
   </section>
 
-  <!-- ABOUT SECTION -->
-  <section id="about" class="min-h-screen bg-peach flex items-center justify-center px-10 py-20">
-    <div class="max-w-3xl text-center">
-      <h2 class="text-3xl md:text-4xl font-light mb-6">About Ana Josefa Labarthe</h2>
-      <p class="text-navy/80 leading-relaxed">
-        This section can include your biography, research focus, and design philosophy. 
-        It will be reached when clicking your name on the left side of the hero section.
-      </p>
+  <!-- ABOUT -->
+  <section id="about" class="min-h-screen bg-peach px-10 py-20 flex items-center">
+    <div class="max-w-6xl mx-auto grid gap-12 md:grid-cols-2 items-center">
+      <div class="w-full">
+        <div class="w-full h-72 sm:h-96 md:h-[520px] overflow-hidden bg-clay border border-taupe/50">
+          <img src="your-photo.jpg" alt="Portrait of Ana Josefa Labarthe"
+               class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-[1.02]" />
+        </div>
+      </div>
+      <div class="w-full">
+        <h2 class="text-3xl md:text-4xl font-light mb-6">About Ana Josefa Labarthe</h2>
+        <p class="text-navy/80 leading-relaxed mb-4">
+          Short bio paragraph goes here. Keep it crisp and specific—focus on what you do,
+          what you care about, and the kinds of projects you’re after.
+        </p>
+        <p class="text-navy/80 leading-relaxed mb-4">
+          Add a second paragraph for your current research focus and how it connects
+          design, data, and urban transformation. Mention priorities and values rather than tool stacks.
+        </p>
+      </div>
     </div>
-
-    <!-- BACK TO MAIN BUTTON -->
-    <a href="#hero"
-       class="text-sm uppercase tracking-[0.2em] border border-navy/30 px-6 py-3 text-navy/80 hover:bg-neon hover:text-sand transition-all duration-300">
-       ← Back to Main
-    </a>
-
   </section>
 
-  <!-- JAVASCRIPT -->
+  <!-- ----- DESTINATION SECTIONS (placeholders to test navigation) ----- -->
+  <section id="designer-professional" class="min-h-screen bg-sand px-10 py-20">
+    <h3 class="text-2xl md:text-3xl font-light mb-6">Architectural Designer — Professional Work</h3>
+    <p class="text-navy/75">Add projects here…</p>
+  </section>
+
+  <section id="designer-academic" class="min-h-screen bg-sand px-10 py-20">
+    <h3 class="text-2xl md:text-3xl font-light mb-6">Architectural Designer — Academic Work</h3>
+    <p class="text-navy/75">Add academic studio/research here…</p>
+  </section>
+
+  <section id="research-articles" class="min-h-screen bg-sand px-10 py-20">
+    <h3 class="text-2xl md:text-3xl font-light mb-6">Research — Articles & Essays</h3>
+    <p class="text-navy/75">Add writing list…</p>
+  </section>
+
+  <section id="research-projects" class="min-h-screen bg-sand px-10 py-20">
+    <h3 class="text-2xl md:text-3xl font-light mb-6">Research — Projects</h3>
+    <p class="text-navy/75">Add research projects…</p>
+  </section>
+
+  <section id="tech-tools" class="min-h-screen bg-sand px-10 py-20">
+    <h3 class="text-2xl md:text-3xl font-light mb-6">Technologist — Tools & Code</h3>
+    <p class="text-navy/75">Add repos, snippets, packages…</p>
+  </section>
+
+  <section id="tech-workflows" class="min-h-screen bg-sand px-10 py-20">
+    <h3 class="text-2xl md:text-3xl font-light mb-6">Technologist — Workflows</h3>
+    <p class="text-navy/75">Add pipelines, docs, diagrams…</p>
+  </section>
+  <!-- --------------------------------------------------------------- -->
+
   <script>
-    const panelToggle = document.getElementById("panelToggle");
-    const panelIcon = document.getElementById("panelIcon");
-    const navLinks = document.getElementById("navLinks");
+  const body = document.body;
+  const hero = document.getElementById("hero");
+  const backToMain = document.getElementById("backToMain");
+  const enterSite = document.getElementById("enterSite");
 
-    if (panelToggle) {
-      panelToggle.addEventListener("click", () => {
-        const isOpen = !navLinks.classList.contains("hidden");
-        navLinks.classList.toggle("hidden");
-        panelIcon.textContent = isOpen ? "+" : "×";
-      });
-    }
+  // helper: leave hero mode and go to a section
+  function exitHeroAndGoTo(selector) {
+    setTimeout(() => {
+      hero.classList.add("hidden");          // remove hero so user can't wheel back
+      body.classList.remove("locked");       // unlock page
+      backToMain.classList.remove("hidden"); // show back button
 
-    navLinks?.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.add("hidden");
-        panelIcon.textContent = "+";
-      });
+      const el = document.querySelector(selector);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 0);
+  }
+
+  // Name → About
+  if (enterSite) {
+    enterSite.addEventListener("click", (e) => {
+      e.preventDefault();        // avoid default anchor jump
+      exitHeroAndGoTo("#about");
     });
-  </script>
+  }
+
+  // Back to main (restore hero + lock)
+  if (backToMain) {
+    backToMain.addEventListener("click", (e) => {
+      e.preventDefault();
+      hero.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        body.classList.add("locked");
+        backToMain.classList.add("hidden");
+      }, 500);
+    });
+  }
+
+  // Clicking a submenu link (Professional Work, etc.) exits hero and navigates
+  document.querySelectorAll(".pop-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const href = link.getAttribute("href");
+      if (href) {
+        exitHeroAndGoTo(href);
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
